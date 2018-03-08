@@ -13,15 +13,14 @@ export class HeroesComponent implements OnInit {
 
   selectedHero: Hero;  
 
-  constructor(private heroService: HeroService) { 
-    // While you could call getHeroes() in the constructor, that's not the best practice.
-    // Reserve the constructor for simple initialization such as wiring constructor parameters to properties.
-    // he constructor shouldn't do anything. It certainly shouldn't call a function that makes HTTP requests to a remote server as a real data service would.
-    this.heroService = this.heroService;
-  }
+  constructor(private heroService: HeroService) { }
 
   ngOnInit() {
     this.getHeroes();
+  }
+
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
   }
 
   getHeroes(): void {
@@ -30,9 +29,4 @@ export class HeroesComponent implements OnInit {
     this.heroService.getHeroes()
       .subscribe(heroes => this.heroes = heroes)
   }
-
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-  }
-
 }
